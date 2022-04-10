@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:index,:show,:edit,:update]
+  resources :groups do
+    get "join" => "groups#join"
+    delete "all_destroy" => 'groups#all_destroy'
+  end
+
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
