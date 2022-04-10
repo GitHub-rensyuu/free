@@ -8,6 +8,7 @@
       <%= render 'books/form', book: @book %>
     </div>
     <div class='col-md-8 offset-md-1'>
+
       <h2>Group Detail</h2>
       <table class='table table-hover table-inverse'>
         <thead>
@@ -21,7 +22,7 @@
         </thead>
         <tbody>
           <tr>
-            <td><%= attachment_image_tag(@group, :image, :fill, 50, 50, fallback: "no-image-icon.jpg") %></td>
+            <td><%= attachment_image_tag(@group, :image, size:"30x30", fallback: "no-image-icon.jpg") %></td>
             <td><%= @group.name %></td>
             <td><%= @group.introduction %></td>
             <td>
@@ -35,6 +36,11 @@
                 <%= link_to 'Delete',group_all_destroy_path(@group),
                   method: :delete,data: { confirm: '本当に削除しますか？' } ,
                   class: "btn btn-sm btn-danger" %>
+                <% if @group.users.count >= 2 %>
+                  <%= link_to group_new_mail_path(@group) do %>
+                    Notice an Event<i class="fas fa-paper-plane"></i>
+                  <% end %>
+                <% end %>
               <% elsif @group.users.include?(current_user) %>
                 <%= link_to 'Leave this group', group_path(@group), method: :delete, class: "btn btn-sm btn-danger" %>
               <% else %>
