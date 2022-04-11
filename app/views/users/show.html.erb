@@ -15,33 +15,7 @@
 </div>
 
 
-<div class='container px-5 px-sm-0'>
-  <div class='row'>
-    <div class='col-md-12'>
-        <table class="table table-bordered">
-           <thead>
-            <tr>
-             <th>６日前</th>
-             <th>5日前</th>
-             <th>4日前</th>
-             <th>3日前</th>
-             <th>２日前</th>
-             <th>昨日</th>
-             <th>今日</th>
-            </tr>
-           </thead>
-           <tbody>
-            <tr>
-             <th><%= @books.created_6days.count %></th>
-             <th><%= @books.created_5days.count %></th>
-             <th><%= @books.created_4days.count %></th>
-             <th><%= @books.created_3days.count %></th>
-             <th><%= @books.created_2days.count %></th>
-             <th><%= @yesterday_book.count %></th>
-             <th><%= @today_book.count %></th>
-            </tr>
-           </tbody>
-        </table>
+
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <canvas id="myChart" width="300" height="100"> </canvas>
@@ -55,7 +29,8 @@
                         labels: ['6日前', '5日前', '4日前', '3日前', '2日前', '1日前', '今日'],
                         datasets: [{
                             label: "投稿した本の数",
-                            data: [<%= @books.created_6days.count %>, <%= @books.created_5days.count %>, <%= @books.created_4days.count %>, <%= @books.created_3days.count %>, <%= @books.created_2days.count %>, <%= @yesterday_book.count %>, <%= @today_book.count%>],
+                            data: <%= @books.past_week_count %>,
+                            // data: [< %= @books.created_6days.count %>, < %= @books.created_5days.count %>, < %= @books.created_4days.count %>, < %= @books.created_3days.count %>, < %= @books.created_2days.count %>, < %= @yesterday_book.count %>, < %= @today_book.count%>],
                             backgroundColor: 'white',
                             // borderColor: 'rgba(255, 80, 120, 1.0)',
                             borderColor: 'blue',
