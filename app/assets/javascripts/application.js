@@ -8,6 +8,8 @@
  * version: 3.1.1
  *
  */
+ import "chartkick/chart.js"
+
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
