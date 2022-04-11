@@ -3,6 +3,9 @@
   	<div class='row'>
     	<div class='mx-auto'>
     		<p>CopyRight Infratop.inc</p>
+    		<% if user_signed_in? %>
+    		  <%= link_to "退会する", unsubscribe_path(current_user) %>
+    	  <% end %>
     	</div>
     </div>
   </div>
