@@ -1,0 +1,38 @@
+
+  <div class="container">
+    <div class="row">
+      <div class='col-md-12'>
+
+
+            <% unless @users.present? %>
+              <h1>フォロワーがいません。</h1>
+            <% else %>
+            <table class='table table-hover table-inverse'>
+              <h1>Follower User</h1>
+              <thead>
+                <tr>
+                  <th>image</th>
+                  <th>name</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <% @users.each do |user| %>
+                      <td><%= image_tag user.get_profile_image(30,30) %></td>
+                      <td><%= user.name %></td>
+                      <td>フォロー数:<%= user.following_user.count %></td>
+                      <td>フォロワー数:<%= user.follower_user.count %></td>
+                      <td><%= link_to "Show",user_path(user) %></td>
+                  <% end %>
+                </tr>
+              </tbody>
+            </table>
+            <% end %>
+
+      </div>
+    </div>
+    <%#= paginate @users %>
+  </div>

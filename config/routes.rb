@@ -11,7 +11,13 @@ Rails.application.routes.draw do
     resources :book_comments, only: [:create,:destroy]
   end
 
-  resources :users, only: [:index,:show,:edit,:update]
+  resources :users, only: [:index,:show,:edit,:update] do
+    member do
+      get :follows, :followers
+    end
+    resource :relationships, only: [:create, :destroy]
+  end
+
   resources :groups do
     get "join" => "groups#join"
     delete "all_destroy" => 'groups#all_destroy'

@@ -7,25 +7,24 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :group_users
 
-  has_many :reverse_of_relationships, foreign_key: "followed_id", dependent: :destroy
-  has_many :followers, through: :reverse_of_relationships, source: :follower
-  # 被フォロー関係を通じて参照→followed_idをフォローしている人
+  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :following_user, through: :follower, source: :followed # 自分がフォローしている人
+  has_many :follower_user, through: :followed, source: :follower # 自分をフォローしている人
 
-  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
-  # 【class_name: "Relationship"】は省略可能
-  has_many :followings, through: :relationships, source: :followed
-  # 与フォロー関係を通じて参照→follower_idをフォローしている人
-
+ # ユーザーをフォローする
   def follow(user_id)
-    relationships.create(followed_id: user_id)
+    follower.create(followed_id: user_id)
   end
 
+  # ユーザーのフォローを外す
   def unfollow(user_id)
-    relationships.find_by(followed_id: user_id).destroy
+    follower.find_by(followed_id: user_id).destroy
   end
 
+  # フォローしていればtrueを返す
   def following?(user)
-    followings.include?(user)
+    following_user.include?(user)
   end
 
   # 特定のユーザーをブロック
