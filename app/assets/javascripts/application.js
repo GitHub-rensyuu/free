@@ -8,7 +8,10 @@
  * version: 3.1.1
  *
  */
- import "chartkick/chart.js"
+// ratyと競合する
+// import "chartkick/chart.js"
+
+
 
 
 (function(root, factory) {
@@ -777,3 +780,4 @@
     return Raty;
   })();
 }));
+
