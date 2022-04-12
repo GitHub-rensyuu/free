@@ -39,6 +39,23 @@
           <%= book.rate %>
         </div>
         </td>
+        <!--いいね機能追加-->
+        <% if book.favorited_by?(current_user) %>
+          <td>
+            <%= link_to book_favorites_path(book),style: "color:red", method: :delete do %>
+              ♥<%= book.favorites.count %>
+            <% end %>
+          </td>
+          <% else %>
+          <td>
+            <%= link_to book_favorites_path(book),style: "color:blue", method: :post do %>
+              ♥<%= book.favorites.count %>
+            <% end %>
+          </td>
+        <% end %>
+
+        <!--コメント件数表示-->
+        <td><span><%= link_to "#{book.book_comments.count} コメント", book_path(book.id), class:"text-dark" %></span></td>
       </tr>
     <% end %>
   </tbody>
