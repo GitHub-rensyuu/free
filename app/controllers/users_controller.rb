@@ -3,7 +3,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    # @books = @user.books
     @book = Book.new
     @books = Book.where(user_id: @user.id)
     @today_book =  @books.created_today
@@ -17,12 +16,10 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @book = Book.new
-  # 2.endがない
   end
 
   def edit
     @user = User.find(params[:id])
-    # 他ユーザーのページの場合自分のページに移動
     unless @user == current_user
       redirect_to user_path(current_user)
     end

@@ -10,7 +10,6 @@ class BooksController < ApplicationController
   def index
     @user = current_user
     @book = Book.new
-    # @books = Book.all
     if params[:sort_new]
       @books = Book.all.order(created_at: :desc)
     elsif params[:sort_review]

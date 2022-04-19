@@ -29,16 +29,23 @@ class User < ApplicationRecord
     following_user.include?(user)
   end
 
-  # 特定のユーザーをブロック
+  # 退会済ユーザーをブロック
   def active_for_authentication?
     super && (is_deleted == false)
   end
 
-  # belongs_to :books
+  # コントローラーに書く場合
+  # if is_deleted == false
+  #   render 今のページ
+  # else
+  #  createアクション
+  #   redirect_to root_path
+  # end
+
+
   has_one_attached :profile_image
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
-  # validates :introduction抜け
   validates :introduction, length: { maximum: 50 }# 「50文字以内」
 
 
