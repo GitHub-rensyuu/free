@@ -14,7 +14,8 @@ import '@fortawesome/fontawesome-free/js/all';
 import "../stylesheets/application"
 require("chartkick") // 追記
 require("chart.js") // 追記
-
+// window.$ = window.jQuery = require('jquery');
+// require('packs/raty')
 
 Rails.start()
 Turbolinks.start()

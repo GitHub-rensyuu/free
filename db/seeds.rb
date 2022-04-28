@@ -7,18 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-# User.create!(
-#   email: "a@a",
-#   name: "a" * 3,
-#   password: "a" * 6
-# )
-
-# User.create!(
-#   email: "b@b",
-#   name: "b" * 3,
-#   password: "b" * 6
-# )
-
 # 0.22user→0.21user並行処理で僅かに早くなる
 require 'parallel'
 
@@ -30,4 +18,12 @@ for n in "a".."d" do
       name: "#{n}" * 3 ,
       password: "#{n}" * 6
     )
+end
+for n in 1..4 do
+  Book.create!(
+        title: "#{n}",
+        body: "#{n}" ,
+        user_id: "#{n}",
+        rate: 5
+      )
 end
